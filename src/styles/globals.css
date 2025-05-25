@@ -1,0 +1,312 @@
+/* Zen Flow Design System - Global Styles */
+
+/* CSS Custom Properties */
+:root {
+  /* Color Palette - Inspired by Japanese aesthetics */
+  --zen-void: #0a0a0a;
+  --zen-ink: #1a1a1a;
+  --zen-shadow: #2a2a2a;
+  --zen-stone: #4a4a4a;
+  --zen-mist: #8a8a8a;
+  --zen-cloud: #dadada;
+  --zen-paper: #fafafa;
+  --zen-light: #ffffff;
+  
+  /* Accent Colors - Subtle and purposeful */
+  --zen-accent: #ff4757;
+  --zen-water: #3742fa;
+  --zen-leaf: #26de81;
+  --zen-sun: #fed330;
+  
+  /* Spacing Scale - Based on 8px grid */
+  --zen-space-xs: 4px;
+  --zen-space-sm: 8px;
+  --zen-space-md: 16px;
+  --zen-space-lg: 32px;
+  --zen-space-xl: 64px;
+  --zen-space-xxl: 128px;
+  
+  /* Typography Scale */
+  --zen-text-xs: 0.75rem;
+  --zen-text-sm: 0.875rem;
+  --zen-text-base: 1rem;
+  --zen-text-lg: 1.25rem;
+  --zen-text-xl: 1.5rem;
+  --zen-text-2xl: 2rem;
+  --zen-text-3xl: 3rem;
+  --zen-text-4xl: 4rem;
+  
+  /* Animation Timing */
+  --zen-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --zen-ease-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+  --zen-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --zen-duration-instant: 100ms;
+  --zen-duration-fast: 200ms;
+  --zen-duration-normal: 300ms;
+  --zen-duration-slow: 500ms;
+  --zen-duration-glacial: 1000ms;
+  
+  /* Shadows */
+  --zen-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --zen-shadow-base: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --zen-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+  --zen-shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
+/* Global Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+               'Helvetica Neue', Arial, sans-serif;
+  color: var(--zen-ink);
+  background-color: var(--zen-paper);
+  font-size: var(--zen-text-base);
+  line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--zen-void);
+}
+
+h1 { font-size: var(--zen-text-4xl); }
+h2 { font-size: var(--zen-text-3xl); }
+h3 { font-size: var(--zen-text-2xl); }
+h4 { font-size: var(--zen-text-xl); }
+h5 { font-size: var(--zen-text-lg); }
+h6 { font-size: var(--zen-text-base); }
+
+p {
+  color: var(--zen-stone);
+  margin-bottom: var(--zen-space-md);
+}
+
+/* Links */
+a {
+  color: var(--zen-water);
+  text-decoration: none;
+  transition: color var(--zen-duration-fast) var(--zen-ease-out);
+}
+
+a:hover {
+  color: var(--zen-accent);
+}
+
+/* Focus States */
+:focus-visible {
+  outline: 2px solid var(--zen-water);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Form Elements */
+input, textarea, select {
+  font-family: inherit;
+  font-size: var(--zen-text-base);
+}
+
+/* Utility Classes */
+.zen-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Animation Utilities */
+.zen-transition {
+  transition: all var(--zen-duration-normal) var(--zen-ease-out);
+}
+
+.zen-transition-fast {
+  transition: all var(--zen-duration-fast) var(--zen-ease-out);
+}
+
+.zen-transition-slow {
+  transition: all var(--zen-duration-slow) var(--zen-ease-out);
+}
+
+/* Motion Reduction */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --zen-void: #ffffff;
+    --zen-ink: #f0f0f0;
+    --zen-shadow: #d0d0d0;
+    --zen-stone: #b0b0b0;
+    --zen-mist: #808080;
+    --zen-cloud: #404040;
+    --zen-paper: #0a0a0a;
+    --zen-light: #1a1a1a;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --zen-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --zen-shadow-base: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --zen-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --zen-shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Component Base Classes */
+.zen-component {
+  position: relative;
+}
+
+.zen-component--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.zen-component--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Ripple Effect */
+@keyframes zen-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.zen-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: zen-ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* Shimmer Loading Effect */
+@keyframes zen-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.zen-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.zen-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: zen-shimmer 1.5s infinite;
+}
+
+/* Slide In Animation */
+@keyframes zen-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.zen-slide-in {
+  animation: zen-slide-in var(--zen-duration-normal) var(--zen-ease-out);
+}
+
+/* Fade In Animation */
+@keyframes zen-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.zen-fade-in {
+  animation: zen-fade-in var(--zen-duration-normal) var(--zen-ease-out);
+}
+
+/* Bounce In Animation */
+@keyframes zen-bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.zen-bounce-in {
+  animation: zen-bounce-in var(--zen-duration-slow) var(--zen-ease-spring);
+}
