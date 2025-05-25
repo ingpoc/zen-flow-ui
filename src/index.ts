@@ -76,5 +76,4 @@ export {
 export { tokens, generateCSSCustomProperties } from './lib/tokens';
 export { cn, sleep, formatClasses, createCSSProps, debounce, shouldReduceMotion, getAnimationDuration } from './lib/utils';
 
-// Styles
-export './styles/globals.css';
+// Styles - Import this in your app: import '@zen-flow/ui/styles/globals.css'

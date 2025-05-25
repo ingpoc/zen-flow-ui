@@ -24,7 +24,7 @@ Every design decision flows through three filters:
 ## Installation
 
 ```bash
-npm install @zen-flow/ui
+npm install @gurusharan3107/zen-flow-ui
 ```
 
 ### Dependencies
@@ -47,13 +47,13 @@ npx zen-ui init
 2. **Import global styles in your app:**
 
 ```tsx
-import '@zen-flow/ui/styles/globals.css';
+import '@gurusharan3107/zen-flow-ui/styles/globals.css';
 ```
 
 3. **Wrap your app with ToastProvider (if using notifications):**
 
 ```tsx
-import { ToastProvider } from '@zen-flow/ui';
+import { ToastProvider } from '@gurusharan3107/zen-flow-ui';
 
 function App() {
   return (
@@ -64,21 +64,94 @@ function App() {
 }
 ```
 
-## CLI Usage
+## Installation & Setup
 
-The Zen Flow UI CLI helps you add components to your project:
+### Basic Installation
 
 ```bash
-# List all available components
-npx zen-ui list
+# Install the component library
+npm install @gurusharan3107/zen-flow-ui
 
-# Add a specific component
-npx zen-ui add button
-npx zen-ui add card
-npx zen-ui add input
+# Install required peer dependencies
+npm install react react-dom class-variance-authority clsx tailwind-merge framer-motion
+```
 
-# Initialize the library
-npx zen-ui init
+### Setup Steps
+
+1. **Import global styles** in your app entry point (e.g., `App.tsx` or `main.tsx`):
+
+```tsx
+import '@gurusharan3107/zen-flow-ui/styles/globals.css';
+```
+
+2. **Add utilities** (create `src/lib/utils.ts`):
+
+```tsx
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+3. **Wrap your app** with ToastProvider if using notifications:
+
+```tsx
+import { ToastProvider } from '@gurusharan3107/zen-flow-ui';
+
+function App() {
+  return (
+    <ToastProvider>
+      {/* Your app content */}
+    </ToastProvider>
+  );
+}
+```
+
+### CLI Usage
+
+The Zen Flow UI CLI provides helpful utilities for project setup and component discovery:
+
+```bash
+# View all available components
+npx @gurusharan3107/zen-flow-ui list
+
+# Get component usage information
+npx @gurusharan3107/zen-flow-ui add button
+
+# Initialize project structure with utilities
+npx @gurusharan3107/zen-flow-ui init
+```
+
+> **Note**: The CLI provides setup and guidance. Components are best used by importing them directly from the package.
+
+## Quick Start
+
+Here's a simple example to get you started:
+
+```tsx
+import React from 'react';
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@gurusharan3107/zen-flow-ui';
+import '@gurusharan3107/zen-flow-ui/styles/globals.css';
+
+function App() {
+  return (
+    <div className="p-8">
+      <Card className="max-w-md">
+        <CardHeader>
+          <CardTitle>Welcome to Zen Flow UI</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4">A minimalist component library with Japanese design principles.</p>
+          <Button>Get Started</Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ## Components
@@ -88,7 +161,7 @@ npx zen-ui init
 Interactive button with multiple variants and subtle animations.
 
 ```tsx
-import { Button } from '@zen-flow/ui';
+import { Button } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   return (
@@ -114,7 +187,7 @@ function Example() {
 Container for related content with hover effects and accent bar.
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@zen-flow/ui';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   return (
@@ -143,7 +216,7 @@ function Example() {
 Text inputs with floating labels and elegant focus states.
 
 ```tsx
-import { Input, Textarea } from '@zen-flow/ui';
+import { Input, Textarea } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const [value, setValue] = useState('');
@@ -179,7 +252,7 @@ function Example() {
 Switch and checkbox components with smooth animations.
 
 ```tsx
-import { Toggle, Checkbox } from '@zen-flow/ui';
+import { Toggle, Checkbox } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const [toggleValue, setToggleValue] = useState(false);
@@ -209,7 +282,7 @@ function Example() {
 Dropdown select with keyboard navigation and search.
 
 ```tsx
-import { Select, type SelectOption } from '@zen-flow/ui';
+import { Select, type SelectOption } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const [value, setValue] = useState('');
@@ -248,7 +321,7 @@ import {
   ModalFooter,
   ModalClose,
   Button 
-} from '@zen-flow/ui';
+} from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const [open, setOpen] = useState(false);
@@ -289,7 +362,7 @@ function Example() {
 Progress indicators with shimmer effects and variants.
 
 ```tsx
-import { Progress, CircularProgress } from '@zen-flow/ui';
+import { Progress, CircularProgress } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   return (
@@ -310,7 +383,7 @@ function Example() {
 Toast notifications with auto-dismiss and variants.
 
 ```tsx
-import { useToast, Button } from '@zen-flow/ui';
+import { useToast, Button } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const { addToast } = useToast();
@@ -343,7 +416,7 @@ function Example() {
 Collapsible content sections with smooth animations.
 
 ```tsx
-import { Accordion, type AccordionItemData } from '@zen-flow/ui';
+import { Accordion, type AccordionItemData } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   const [value, setValue] = useState('');
@@ -377,7 +450,7 @@ function Example() {
 Placeholder content with shimmer animation.
 
 ```tsx
-import { Skeleton } from '@zen-flow/ui';
+import { Skeleton } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   return (
@@ -396,7 +469,7 @@ function Example() {
 Access design tokens programmatically:
 
 ```tsx
-import { tokens, generateCSSCustomProperties } from '@zen-flow/ui';
+import { tokens, generateCSSCustomProperties } from '@gurusharan3107/zen-flow-ui';
 
 // Use tokens in your components
 const customStyle = {
@@ -472,6 +545,28 @@ All components follow WCAG guidelines and include:
 - Firefox 88+
 - Safari 14+
 - Edge 90+
+
+## Troubleshooting
+
+### Common Issues
+
+**CSS not loading properly:**
+- Make sure you've imported the global styles: `import '@gurusharan3107/zen-flow-ui/styles/globals.css'`
+- Ensure Tailwind CSS is configured if you're using custom classes
+
+**TypeScript errors:**
+- Install the required type dependencies: `npm install @types/react @types/react-dom`
+- Make sure your `tsconfig.json` includes the `jsx` option
+
+**Component styling issues:**
+- Verify that `clsx` and `tailwind-merge` are installed
+- Check that the `cn` utility function is properly imported
+
+**CLI not working:**
+- The CLI is currently experimental. Use direct imports instead:
+  ```tsx
+  import { ComponentName } from '@gurusharan3107/zen-flow-ui';
+  ```
 
 ## Contributing
 

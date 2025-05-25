@@ -78,7 +78,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
     label,
     description,
     disabled,
-    name,
+    name: _name,
     ...props 
   }, ref) => {
     const handleToggle = () => {

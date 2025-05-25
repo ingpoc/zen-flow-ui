@@ -73,7 +73,7 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
       if (duration > 0) {
         const timer = setTimeout(() => {
           setIsVisible(false);
-          setTimeout(onClose, 300); // Wait for exit animation
+          if (onClose) setTimeout(onClose, 300); // Wait for exit animation
         }, duration);
 
         return () => clearTimeout(timer);
@@ -82,7 +82,7 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
 
     const handleClose = () => {
       setIsVisible(false);
-      setTimeout(onClose, 300);
+      if (onClose) setTimeout(onClose, 300);
     };
 
     const getDefaultIcon = () => {
@@ -268,16 +268,16 @@ const ToastContainer: React.FC = () => {
 
 // Convenience functions
 export const toast = {
-  success: (title: string, description?: string) => {
+  success: (_title: string, _description?: string) => {
     // This would be implemented by the consumer using useToast hook
   },
-  error: (title: string, description?: string) => {
+  error: (_title: string, _description?: string) => {
     // This would be implemented by the consumer using useToast hook
   },
-  warning: (title: string, description?: string) => {
+  warning: (_title: string, _description?: string) => {
     // This would be implemented by the consumer using useToast hook
   },
-  info: (title: string, description?: string) => {
+  info: (_title: string, _description?: string) => {
     // This would be implemented by the consumer using useToast hook
   },
 };

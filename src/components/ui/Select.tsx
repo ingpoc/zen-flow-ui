@@ -238,7 +238,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             data-side="bottom"
           >
             <div className="max-h-96 overflow-auto p-1">
-              {options.map((option, index) => (
+              {options.map((option, _index) => (
                 <div
                   key={option.value}
                   className={cn(

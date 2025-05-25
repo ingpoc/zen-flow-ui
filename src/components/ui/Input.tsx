@@ -28,7 +28,7 @@ const inputVariants = cva(
           'focus:border-zen-leaf focus:ring-zen-leaf/10',
         ],
       },
-      size: {
+      inputSize: {
         sm: 'h-9 px-3 text-sm',
         default: 'h-12 px-4',
         lg: 'h-14 px-5 text-lg',
@@ -36,7 +36,7 @@ const inputVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
+      inputSize: 'default',
     },
   }
 );
@@ -77,7 +77,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ 
     className, 
     variant, 
-    size, 
+    inputSize, 
     type = 'text',
     label,
     helperText,
@@ -88,7 +88,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   }, ref) => {
     const [focused, setFocused] = useState(false);
     const hasValue = value !== undefined ? String(value).length > 0 : false;
-    const shouldFloat = focused || hasValue || props.placeholder;
+    const shouldFloat = focused || hasValue || !!props.placeholder;
     
     const finalVariant = error ? 'error' : variant;
 
@@ -97,7 +97,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           <input
             type={type}
-            className={cn(inputVariants({ variant: finalVariant, size }), className)}
+            className={cn(inputVariants({ variant: finalVariant, inputSize }), className)}
             ref={ref}
             value={value}
             onChange={onChange}
@@ -206,7 +206,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }, ref) => {
     const [focused, setFocused] = useState(false);
     const hasValue = value !== undefined ? String(value).length > 0 : false;
-    const shouldFloat = focused || hasValue || props.placeholder;
+    const shouldFloat = focused || hasValue || !!props.placeholder;
     
     const finalVariant = error ? 'error' : variant;
 

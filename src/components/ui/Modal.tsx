@@ -131,7 +131,7 @@ const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
     children, 
     size, 
     rounded,
-    onEscapeKeyDown,
+    onEscapeKeyDown: _onEscapeKeyDown,
     onPointerDownOutside,
     ...props 
   }, ref) => {
