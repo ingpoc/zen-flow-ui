@@ -1,6 +1,6 @@
 {
   "name": "@gurusharan3107/zen-flow-ui",
-  "version": "1.0.2",
+  "version": "2.1.2",
   "description": "A minimalist React component library inspired by Japanese design principles",
   "type": "module",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
     "cli"
   ],
   "bin": {
-    "zen-ui": "./cli/index.cjs"
+    "zen-ui": "cli/index.cjs"
   },
   "scripts": {
     "build": "rollup -c",
@@ -39,7 +39,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ingpoc/zen-flow-ui"
+    "url": "git+https://github.com/ingpoc/zen-flow-ui.git"
   },
   "homepage": "https://github.com/ingpoc/zen-flow-ui#readme",
   "bugs": {

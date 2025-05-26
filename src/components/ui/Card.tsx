@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const cardVariants = cva(
   [
@@ -74,14 +75,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(cardVariants({ variant, padding }), className)}
-      style={{
-        '--zen-light': '#ffffff',
-        '--zen-accent': '#ff4757',
-        '--zen-water': '#3742fa',
-        '--zen-cloud': '#dadada',
-        '--zen-void': '#0a0a0a',
-        '--zen-stone': '#4a4a4a',
-      } as React.CSSProperties}
+      style={getComponentThemeProps('card')}
       {...props}
     />
   )
@@ -135,4 +129,5 @@ export {
   CardTitle,
   CardDescription,
   CardContent,
+  cardVariants,
 };

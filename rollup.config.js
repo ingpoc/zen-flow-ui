@@ -15,12 +15,14 @@ export default {
       file: packageJson.main,
       format: 'cjs',
       sourcemap: true,
-      name: 'zen-flow-ui'
+      name: 'zen-flow-ui',
+      exports: 'named'
     },
     {
       file: packageJson.module,
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named'
     }
   ],
   plugins: [

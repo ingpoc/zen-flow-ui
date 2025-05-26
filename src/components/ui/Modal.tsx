@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const modalOverlayVariants = cva([
   'fixed inset-0 z-50',
@@ -116,9 +117,7 @@ const ModalOverlay = forwardRef<
     <div
       ref={ref}
       className={cn(modalOverlayVariants(), className)}
-      style={{
-        '--zen-light': '#ffffff',
-      } as React.CSSProperties}
+      style={getComponentThemeProps('modal')}
       {...props}
     />
   </ModalPortal>
@@ -147,9 +146,7 @@ const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
           ref={ref}
           className={cn(modalContentVariants({ size, rounded }), className)}
           onPointerDown={handlePointerDown}
-          style={{
-            '--zen-light': '#ffffff',
-          } as React.CSSProperties}
+          style={getComponentThemeProps('modal')}
           {...props}
         >
           {children}
@@ -200,9 +197,7 @@ const ModalTitle = forwardRef<
       'text-lg font-semibold leading-none tracking-tight text-zen-void',
       className
     )}
-    style={{
-      '--zen-void': '#0a0a0a',
-    } as React.CSSProperties}
+    style={getComponentThemeProps('modal')}
     {...props}
   />
 ));
@@ -215,9 +210,7 @@ const ModalDescription = forwardRef<
   <p
     ref={ref}
     className={cn('text-sm text-zen-stone', className)}
-    style={{
-      '--zen-stone': '#4a4a4a',
-    } as React.CSSProperties}
+    style={getComponentThemeProps('modal')}
     {...props}
   />
 ));
@@ -238,10 +231,7 @@ const ModalClose = forwardRef<
       'disabled:pointer-events-none',
       className
     )}
-    style={{
-      '--zen-light': '#ffffff',
-      '--zen-water': '#3742fa',
-    } as React.CSSProperties}
+    style={getComponentThemeProps('modal')}
     {...props}
   >
     <svg
@@ -274,4 +264,6 @@ export {
   ModalTitle,
   ModalDescription,
   ModalClose,
+  modalOverlayVariants,
+  modalContentVariants,
 };

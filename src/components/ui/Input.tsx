@@ -1,6 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes, useState } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const inputVariants = cva(
   [
@@ -109,14 +110,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               setFocused(false);
               props.onBlur?.(e);
             }}
-            style={{
-              '--zen-light': '#ffffff',
-              '--zen-cloud': '#dadada',
-              '--zen-water': '#3742fa',
-              '--zen-accent': '#ff4757',
-              '--zen-leaf': '#26de81',
-              '--zen-mist': '#8a8a8a',
-            } as React.CSSProperties}
+            style={getComponentThemeProps('input')}
             {...props}
           />
           {label && (
@@ -226,14 +220,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               setFocused(false);
               props.onBlur?.(e);
             }}
-            style={{
-              '--zen-light': '#ffffff',
-              '--zen-cloud': '#dadada',
-              '--zen-water': '#3742fa',
-              '--zen-accent': '#ff4757',
-              '--zen-leaf': '#26de81',
-              '--zen-mist': '#8a8a8a',
-            } as React.CSSProperties}
+            style={getComponentThemeProps('input')}
             {...props}
           />
           {label && (

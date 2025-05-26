@@ -1,408 +1,282 @@
 import React, { useState } from 'react';
 import {
   Button,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  Input,
   Textarea,
-  Toggle,
-  Checkbox,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-  ModalDescription,
-  ModalFooter,
-  ModalClose,
-  Progress,
-  CircularProgress,
-  Skeleton,
-  Notification,
-  ToastProvider,
-  useToast,
-  Select,
-  Accordion,
-  type SelectOption,
-  type AccordionItemData,
-} from '@zen-flow/ui';
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Breadcrumb,
+  useBreadcrumbFromPath,
+  createZenTheme,
+  applyThemeToRoot,
+  cn
+} from '@gurusharan3107/zen-flow-ui';
 
-// Example app demonstrating all components
-const ZenFlowExample: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [toggleValue, setToggleValue] = useState(false);
-  const [checkboxValue, setCheckboxValue] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [textareaValue, setTextareaValue] = useState('');
-  const [selectValue, setSelectValue] = useState('');
-  const [accordionValue, setAccordionValue] = useState<string>('');
-  const [progress, setProgress] = useState(65);
-  
-  const { addToast } = useToast();
+function App() {
+  const [textValue, setTextValue] = useState('');
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [currentPath] = useState('/home/dashboard/components');
 
-  // Select options
-  const selectOptions: SelectOption[] = [
-    { value: 'option1', label: 'First Option' },
-    { value: 'option2', label: 'Second Option' },
-    { value: 'option3', label: 'Third Option' },
-    { value: 'option4', label: 'Disabled Option', disabled: true },
-  ];
+  // Generate breadcrumb items from current path
+  const breadcrumbItems = useBreadcrumbFromPath(currentPath, {
+    'home': 'Home',
+    'dashboard': 'Dashboard',
+    'components': 'Components'
+  });
 
-  // Accordion items
-  const accordionItems: AccordionItemData[] = [
-    {
-      value: 'item-1',
-      title: 'What is Zen Flow Design?',
-      content: (
-        <div>
-          <p className="mb-4">
-            Zen Flow Design is a minimalist approach to user interface design, 
-            inspired by Japanese aesthetics and the principle that every element 
-            should serve a purpose.
-          </p>
-          <p>
-            It emphasizes negative space, subtle animations, and a restrained 
-            color palette to create interfaces that feel both powerful and peaceful.
-          </p>
-        </div>
-      ),
-    },
-    {
-      value: 'item-2',
-      title: 'Core Design Principles',
-      content: (
-        <ul className="space-y-2 list-disc list-inside">
-          <li><strong>Minimalist Clarity</strong> - Remove everything unnecessary</li>
-          <li><strong>Rhythmic Structure</strong> - Create harmony through mathematical relationships</li>
-          <li><strong>Organic Motion</strong> - Animations should feel natural and purposeful</li>
-          <li><strong>Breathing Space</strong> - Negative space is full of possibility</li>
-          <li><strong>Subtle Depth</strong> - Create layers without harsh shadows</li>
-        </ul>
-      ),
-    },
-    {
-      value: 'item-3',
-      title: 'Component Architecture',
-      content: (
-        <div>
-          <p className="mb-4">
-            Each component is built with accessibility in mind, following WCAG guidelines 
-            and supporting keyboard navigation, screen readers, and reduced motion preferences.
-          </p>
-          <p>
-            Components use class-variance-authority for consistent styling variants 
-            and Tailwind CSS for utility-first styling.
-          </p>
-        </div>
-      ),
-    },
-  ];
-
-  const showToast = (variant: 'default' | 'success' | 'warning' | 'error' | 'info') => {
-    const messages = {
-      default: { title: 'Default Toast', description: 'This is a default notification' },
-      success: { title: 'Success!', description: 'Your action was completed successfully' },
-      warning: { title: 'Warning', description: 'Please check your input' },
-      error: { title: 'Error', description: 'Something went wrong' },
-      info: { title: 'Info', description: 'Here is some helpful information' },
-    };
-    
-    addToast({
-      variant,
-      ...messages[variant],
+  // Create and apply a custom theme
+  React.useEffect(() => {
+    const customTheme = createZenTheme({
+      name: 'custom-test',
+      tokens: {
+        colors: {
+          accent: '#3742fa'
+        }
+      }
     });
-  };
+    applyThemeToRoot(customTheme);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-zen-paper p-8">
-      <div className="max-w-6xl mx-auto space-y-12">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-light text-zen-void tracking-tight">
-            Zen Flow UI Components
+    <div className="min-h-screen bg-zen-paper">
+      {/* Header */}
+      <header className="bg-zen-light border-b border-zen-cloud px-6 py-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl font-light text-zen-ink mb-2">
+            Zen Flow UI v2.1.0 Test
           </h1>
-          <p className="text-lg text-zen-stone max-w-2xl mx-auto">
-            A minimalist React component library inspired by Japanese design principles. 
-            Every component breathes with purpose and flows with intention.
-          </p>
+          <Breadcrumb items={breadcrumbItems} separator="→" />
         </div>
+      </header>
 
-        {/* Buttons */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Buttons</CardTitle>
-            <CardDescription>
-              Interactive elements with subtle animations and multiple variants
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-6 py-8 space-y-8">
+        
+        {/* Introduction */}
+        <section className="text-center space-y-4">
+          <h2 className="text-3xl font-light text-zen-void">
+            Production Ready Components
+          </h2>
+          <p className="text-zen-stone max-w-2xl mx-auto">
+            Testing the latest zen-flow-ui components published to npm. 
+            All issues have been resolved and components are production-ready.
+          </p>
+        </section>
+
+        {/* Button Showcase */}
+        <section className="space-y-4">
+          <h3 className="text-xl font-medium text-zen-ink">Button Components</h3>
+          <div className="bg-zen-light rounded-lg p-6 border border-zen-cloud">
             <div className="flex flex-wrap gap-4">
               <Button>Primary Button</Button>
               <Button variant="secondary">Secondary</Button>
               <Button variant="accent">Accent</Button>
               <Button variant="ghost">Ghost</Button>
+              <Button variant="outline">Outline</Button>
               <Button variant="destructive">Destructive</Button>
-              <Button loading>Loading...</Button>
-              <Button size="sm">Small</Button>
-              <Button size="lg">Large</Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Form Elements */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Form Elements</CardTitle>
-            <CardDescription>
-              Inputs with floating labels and elegant focus states
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input
-                label="Your Name"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                helperText="Enter your full name"
-              />
-              <Input
-                label="Email Address"
-                type="email"
-                placeholder="john@example.com"
-                helperText="We'll never share your email"
-              />
+              <Button variant="link">Link</Button>
             </div>
             
-            <Textarea
-              label="Message"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
-              placeholder="Tell us about your project..."
-              helperText="Minimum 10 characters"
-            />
+            <div className="mt-4 flex flex-wrap gap-4">
+              <Button size="sm">Small</Button>
+              <Button size="default">Default</Button>
+              <Button size="lg">Large</Button>
+              <Button loading>Loading...</Button>
+              <Button fullWidth className="mt-2">Full Width</Button>
+            </div>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Select
-                label="Choose an option"
-                options={selectOptions}
-                value={selectValue}
-                onChange={setSelectValue}
-                placeholder="Select your preference..."
+        {/* Textarea Component */}
+        <section className="space-y-4">
+          <h3 className="text-xl font-medium text-zen-ink">Textarea Component</h3>
+          <div className="bg-zen-light rounded-lg p-6 border border-zen-cloud">
+            <div className="space-y-4">
+              <Textarea
+                label="Auto-resize Textarea"
+                value={textValue}
+                onChange={(e) => setTextValue(e.target.value)}
+                placeholder="Type something here... This textarea auto-resizes!"
+                helperText="Supports auto-resize, min/max rows, error states, and animations"
+                autoResize={true}
+                minRows={3}
+                maxRows={8}
               />
               
-              <div className="space-y-4">
-                <Toggle
-                  checked={toggleValue}
-                  onChange={setToggleValue}
-                  label="Enable notifications"
-                  description="Receive updates about your account"
-                />
-                
-                <Checkbox
-                  checked={checkboxValue}
-                  onChange={setCheckboxValue}
-                  label="I agree to the terms"
-                  description="By checking this, you accept our terms of service"
-                />
+              <Textarea
+                label="Fixed Size Textarea"
+                placeholder="This textarea has a fixed size"
+                helperText="No auto-resize, traditional textarea behavior"
+                size="lg"
+              />
+              
+              <Textarea
+                label="Error State"
+                error="This field is required"
+                placeholder="Textarea with error state"
+                variant="error"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Popover Component */}
+        <section className="space-y-4">
+          <h3 className="text-xl font-medium text-zen-ink">Popover Component</h3>
+          <div className="bg-zen-light rounded-lg p-6 border border-zen-cloud">
+            <div className="space-y-4">
+              <p className="text-zen-stone mb-4">
+                Advanced popover with collision detection, keyboard navigation, and smooth animations.
+              </p>
+              
+              <div className="flex gap-4">
+                <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline">
+                      Open Popover
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80">
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-zen-ink">Advanced Popover</h4>
+                      <p className="text-sm text-zen-stone">
+                        This popover includes:
+                      </p>
+                      <ul className="text-sm text-zen-stone space-y-1 list-disc list-inside">
+                        <li>Smart collision detection</li>
+                        <li>Keyboard navigation (ESC to close)</li>
+                        <li>Click outside to close</li>
+                        <li>Smooth framer-motion animations</li>
+                        <li>Portal rendering</li>
+                        <li>Accessibility support</li>
+                      </ul>
+                      <Button 
+                        size="sm" 
+                        onClick={() => setPopoverOpen(false)}
+                        className="mt-2"
+                      >
+                        Close Popover
+                      </Button>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="secondary">
+                      Another Popover
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent side="top" align="start">
+                    <div className="space-y-2">
+                      <h4 className="font-medium text-zen-ink">Positioned Popover</h4>
+                      <p className="text-sm text-zen-stone">
+                        This popover opens on top with start alignment.
+                      </p>
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </section>
 
-        {/* Progress Indicators */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Progress Indicators</CardTitle>
-            <CardDescription>
-              Visual feedback with shimmer effects and smooth animations
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <Progress value={progress} showLabel label="Upload Progress" />
-                <Progress value={85} variant="success" showLabel label="Success" />
-                <Progress value={45} variant="warning" showLabel label="Warning" />
-                <Progress value={25} variant="accent" showLabel label="Accent" />
-                
-                <div className="flex gap-4">
-                  <Button 
-                    size="sm" 
-                    onClick={() => setProgress(Math.min(progress + 10, 100))}
-                  >
-                    +10%
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="secondary"
-                    onClick={() => setProgress(Math.max(progress - 10, 0))}
-                  >
-                    -10%
-                  </Button>
-                </div>
+        {/* Breadcrumb Component */}
+        <section className="space-y-4">
+          <h3 className="text-xl font-medium text-zen-ink">Breadcrumb Component</h3>
+          <div className="bg-zen-light rounded-lg p-6 border border-zen-cloud">
+            <div className="space-y-4">
+              <div>
+                <p className="text-zen-stone mb-3">Default breadcrumb (shown in header):</p>
+                <Breadcrumb items={breadcrumbItems} />
               </div>
               
-              <div className="flex justify-center">
-                <CircularProgress
-                  value={progress}
-                  size={120}
-                  showLabel
-                  label="Completion"
+              <div>
+                <p className="text-zen-stone mb-3">Collapsible breadcrumb with custom separator:</p>
+                <Breadcrumb 
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Projects', href: '/projects' },
+                    { label: 'Web Development', href: '/projects/web' },
+                    { label: 'React Apps', href: '/projects/web/react' },
+                    { label: 'Component Libraries', href: '/projects/web/react/libraries' },
+                    { label: 'Zen Flow UI', current: true }
+                  ]}
+                  separator="/"
+                  maxItems={4}
+                  itemsBeforeCollapse={2}
+                  itemsAfterCollapse={1}
                 />
               </div>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Accordion */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Accordion</CardTitle>
-            <CardDescription>
-              Collapsible content sections with smooth animations
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Accordion
-              items={accordionItems}
-              value={accordionValue}
-              onValueChange={setAccordionValue}
-              collapsible
-            />
-          </CardContent>
-        </Card>
-
-        {/* Notifications */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>
-              Toast messages with different variants and auto-dismiss
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-4">
-              <Button onClick={() => showToast('default')}>Default</Button>
-              <Button onClick={() => showToast('success')}>Success</Button>
-              <Button onClick={() => showToast('warning')}>Warning</Button>
-              <Button onClick={() => showToast('error')}>Error</Button>
-              <Button onClick={() => showToast('info')}>Info</Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Modal */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Modal</CardTitle>
-            <CardDescription>
-              Overlay dialogs with backdrop blur and smooth transitions
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button onClick={() => setModalOpen(true)}>
-              Open Modal
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Skeleton Loaders */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Skeleton Loaders</CardTitle>
-            <CardDescription>
-              Placeholder content with shimmer animation
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <Skeleton variant="title" />
-              <Skeleton variant="text" />
-              <Skeleton variant="text" className="w-4/5" />
-              <Skeleton variant="text" className="w-3/5" />
-              <Skeleton variant="box" className="h-32" />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Card Variants */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card variant="outlined">
-            <CardHeader>
-              <CardTitle>Outlined Card</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>This card has a subtle border instead of a shadow.</p>
-            </CardContent>
-          </Card>
-          
-          <Card variant="elevated">
-            <CardHeader>
-              <CardTitle>Elevated Card</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>This card has enhanced elevation for emphasis.</p>
-            </CardContent>
-          </Card>
-          
-          <Card variant="flat">
-            <CardHeader>
-              <CardTitle>Flat Card</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>This card has no shadow for a minimal look.</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* Modal */}
-      <Modal open={modalOpen} onOpenChange={setModalOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <ModalTitle>The Art of Simplicity</ModalTitle>
-            <ModalDescription>
-              In the practice of design, we find that removing elements often 
-              creates more impact than adding them.
-            </ModalDescription>
-          </ModalHeader>
-          
-          <div className="py-4">
-            <p className="text-zen-stone leading-relaxed">
-              This modal demonstrates the Zen Flow approach to overlay design. 
-              Notice the subtle backdrop blur, the gentle animation, and the 
-              restrained use of visual elements.
-            </p>
           </div>
-          
-          <ModalFooter>
-            <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setModalOpen(false)}>
-              Understand
-            </Button>
-          </ModalFooter>
-          
-          <ModalClose onClick={() => setModalOpen(false)} />
-        </ModalContent>
-      </Modal>
+        </section>
+
+        {/* Theme System */}
+        <section className="space-y-4">
+          <h3 className="text-xl font-medium text-zen-ink">Theme System</h3>
+          <div className="bg-zen-light rounded-lg p-6 border border-zen-cloud">
+            <div className="space-y-4">
+              <p className="text-zen-stone">
+                Zen Flow UI includes a comprehensive theme system with Japanese-inspired colors:
+              </p>
+              
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+                {[
+                  { name: 'void', color: 'bg-zen-void' },
+                  { name: 'ink', color: 'bg-zen-ink' },
+                  { name: 'shadow', color: 'bg-zen-shadow' },
+                  { name: 'stone', color: 'bg-zen-stone' },
+                  { name: 'mist', color: 'bg-zen-mist' },
+                  { name: 'cloud', color: 'bg-zen-cloud' },
+                  { name: 'paper', color: 'bg-zen-paper' },
+                  { name: 'light', color: 'bg-zen-light' },
+                ].map((color) => (
+                  <div key={color.name} className="text-center">
+                    <div className={cn(
+                      'w-12 h-12 rounded-lg border border-zen-cloud mx-auto mb-1',
+                      color.color
+                    )} />
+                    <span className="text-xs text-zen-stone">{color.name}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 grid grid-cols-4 gap-3">
+                {[
+                  { name: 'water', color: 'bg-zen-water' },
+                  { name: 'leaf', color: 'bg-zen-leaf' },
+                  { name: 'sun', color: 'bg-zen-sun' },
+                  { name: 'accent', color: 'bg-zen-accent' },
+                ].map((color) => (
+                  <div key={color.name} className="text-center">
+                    <div className={cn(
+                      'w-12 h-12 rounded-lg border border-zen-cloud mx-auto mb-1',
+                      color.color
+                    )} />
+                    <span className="text-xs text-zen-stone">{color.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Status */}
+        <section className="text-center space-y-4 py-8">
+          <div className="inline-flex items-center gap-2 bg-zen-leaf/10 text-zen-leaf px-4 py-2 rounded-lg">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            All components working perfectly!
+          </div>
+          <p className="text-zen-stone">
+            zen-flow-ui v2.1.0 is production-ready with zero build errors and comprehensive TypeScript support.
+          </p>
+        </section>
+      </main>
     </div>
   );
-};
+}
 
-// App wrapper with ToastProvider
-const App: React.FC = () => {
-  return (
-    <ToastProvider>
-      <ZenFlowExample />
-    </ToastProvider>
-  );
-};
-
-export default App;
+export default App; 

@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useState, HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const notificationVariants = cva(
   [
@@ -129,15 +130,7 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
           !isVisible && 'translate-x-full opacity-0',
           className
         )}
-        style={{
-          '--zen-void': '#0a0a0a',
-          '--zen-light': '#ffffff',
-          '--zen-shadow': '#2a2a2a',
-          '--zen-leaf': '#26de81',
-          '--zen-sun': '#fed330',
-          '--zen-accent': '#ff4757',
-          '--zen-water': '#3742fa',
-        } as React.CSSProperties}
+        style={getComponentThemeProps('notification')}
         {...props}
       >
         {/* Icon */}

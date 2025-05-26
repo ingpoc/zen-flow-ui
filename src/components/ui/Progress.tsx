@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const progressVariants = cva(
   [
@@ -86,15 +87,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         <div
           ref={ref}
           className={cn(progressVariants({ size }), className)}
-          style={{
-            '--zen-cloud': '#dadada',
-            '--zen-water': '#3742fa',
-            '--zen-accent': '#ff4757',
-            '--zen-leaf': '#26de81',
-            '--zen-sun': '#fed330',
-            '--zen-ink': '#1a1a1a',
-            '--zen-mist': '#8a8a8a',
-          } as React.CSSProperties}
+          style={getComponentThemeProps('progress')}
           {...props}
         >
           <div
@@ -241,9 +234,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
           variantClasses[variant],
           className
         )}
-        style={{
-          '--zen-cloud': '#dadada',
-        } as React.CSSProperties}
+        style={getComponentThemeProps('progress')}
         {...props}
       />
     );

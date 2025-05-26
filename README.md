@@ -3,6 +3,10 @@
 <div align="center">
   <h2>🎋 A minimalist React component library inspired by Japanese design principles</h2>
   <p>Where every component breathes with purpose and flows with intention</p>
+  
+  [![NPM Version](https://img.shields.io/npm/v/@gurusharan3107/zen-flow-ui)](https://www.npmjs.com/package/@gurusharan3107/zen-flow-ui)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 </div>
 
 ---
@@ -21,6 +25,17 @@ Every design decision flows through three filters:
 2. **Is it visually coherent?** (Form)  
 3. **Does it spark joy?** (Delight)
 
+## Features
+
+✨ **20+ Production-Ready Components** - Carefully crafted with attention to detail  
+🎨 **Japanese-Inspired Design** - Minimalist aesthetics with purposeful interactions  
+♿ **Accessibility First** - WCAG compliant with full keyboard navigation  
+🎭 **Motion-Sensitive** - Respects `prefers-reduced-motion` settings  
+🔧 **TypeScript Native** - Full type safety and excellent DX  
+🌙 **Dark Mode Ready** - CSS custom properties for easy theming  
+📦 **Tree Shakable** - Import only what you need  
+⚡ **Performance Optimized** - No inline style anti-patterns, clean CSS  
+
 ## Installation
 
 ```bash
@@ -38,47 +53,7 @@ npm install class-variance-authority clsx tailwind-merge framer-motion
 
 ### Setup
 
-1. **Initialize Zen Flow UI in your project:**
-
-```bash
-npx zen-ui init
-```
-
-2. **Import global styles in your app:**
-
-```tsx
-import '@gurusharan3107/zen-flow-ui/styles/globals.css';
-```
-
-3. **Wrap your app with ToastProvider (if using notifications):**
-
-```tsx
-import { ToastProvider } from '@gurusharan3107/zen-flow-ui';
-
-function App() {
-  return (
-    <ToastProvider>
-      {/* Your app content */}
-    </ToastProvider>
-  );
-}
-```
-
-## Installation & Setup
-
-### Basic Installation
-
-```bash
-# Install the component library
-npm install @gurusharan3107/zen-flow-ui
-
-# Install required peer dependencies
-npm install react react-dom class-variance-authority clsx tailwind-merge framer-motion
-```
-
-### Setup Steps
-
-1. **Import global styles** in your app entry point (e.g., `App.tsx` or `main.tsx`):
+1. **Import global styles in your app:**
 
 ```tsx
 import '@gurusharan3107/zen-flow-ui/styles/globals.css';
@@ -95,7 +70,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-3. **Wrap your app** with ToastProvider if using notifications:
+3. **Wrap your app with ToastProvider (if using notifications):**
 
 ```tsx
 import { ToastProvider } from '@gurusharan3107/zen-flow-ui';
@@ -108,23 +83,6 @@ function App() {
   );
 }
 ```
-
-### CLI Usage
-
-The Zen Flow UI CLI provides helpful utilities for project setup and component discovery:
-
-```bash
-# View all available components
-npx @gurusharan3107/zen-flow-ui list
-
-# Get component usage information
-npx @gurusharan3107/zen-flow-ui add button
-
-# Initialize project structure with utilities
-npx @gurusharan3107/zen-flow-ui init
-```
-
-> **Note**: The CLI provides setup and guidance. Components are best used by importing them directly from the package.
 
 ## Quick Start
 
@@ -154,332 +112,133 @@ function App() {
 export default App;
 ```
 
-## Components
+## Available Components
 
-### Button
+### Form & Input Components
+- **Button** - Interactive button with multiple variants and subtle animations
+- **Input** - Text input with floating labels and elegant focus states  
+- **Textarea** - Multi-line text input with auto-resize capabilities
+- **Select** - Dropdown select with keyboard navigation and search
+- **Toggle** - Switch component with smooth animations
+- **RadioGroup** - Radio button groups with proper accessibility
+- **Slider** - Range slider with tooltips and custom formatting
 
-Interactive button with multiple variants and subtle animations.
+### Layout & Navigation
+- **Card** - Container for related content with hover effects
+- **Accordion** - Collapsible content sections with smooth animations
+- **Tabs** - Tab navigation with keyboard support
+- **Breadcrumb** - Navigation breadcrumbs with automatic path detection
+
+### Data Display
+- **DataTable** - Advanced table with sorting, filtering, and pagination
+- **Progress** - Linear and circular progress indicators
+- **Alert** - Status messages with multiple variants
+
+### Overlay Components
+- **Modal** - Overlay dialog with backdrop blur and smooth transitions
+- **Dialog** - Accessible dialog component with proper focus management
+- **Popover** - Floating content with smart positioning
+- **Tooltip** - Contextual information with hover and focus states
+
+### Utility Components
+- **Command** - Command palette with search and keyboard navigation
+- **Notification** - Toast notifications with auto-dismiss
+
+## Usage Examples
+
+### Button with Loading State
 
 ```tsx
 import { Button } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
+  const [loading, setLoading] = useState(false);
+  
   return (
-    <div className="space-x-4">
-      <Button>Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="accent">Accent</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button loading>Loading...</Button>
-    </div>
+    <Button 
+      loading={loading} 
+      onClick={() => setLoading(true)}
+      variant="primary"
+    >
+      {loading ? 'Processing...' : 'Submit'}
+    </Button>
   );
 }
 ```
 
-**Props:**
-- `variant`: `'primary' | 'secondary' | 'accent' | 'ghost' | 'destructive'`
-- `size`: `'sm' | 'default' | 'lg' | 'icon'`
-- `loading`: `boolean`
-- `leftIcon`, `rightIcon`: `ReactNode`
-
-### Card
-
-Container for related content with hover effects and accent bar.
+### Card with Hover Effects
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@gurusharan3107/zen-flow-ui';
+import { Card, CardHeader, CardTitle, CardContent } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
   return (
-    <Card>
+    <Card variant="elevated" className="max-w-md">
       <CardHeader>
         <CardTitle>Minimalist Design</CardTitle>
-        <CardDescription>Every element serves a purpose</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Content goes here...</p>
+        <p>Every element serves a purpose in this carefully crafted interface.</p>
       </CardContent>
-      <CardFooter>
-        <Button>Action</Button>
-      </CardFooter>
     </Card>
   );
 }
 ```
 
-**Props:**
-- `variant`: `'default' | 'outlined' | 'elevated' | 'flat'`
-- `padding`: `'none' | 'sm' | 'default' | 'lg'`
-
-### Input & Textarea
-
-Text inputs with floating labels and elegant focus states.
+### Form with Validation
 
 ```tsx
-import { Input, Textarea } from '@gurusharan3107/zen-flow-ui';
+import { Input, Button, Card, CardContent } from '@gurusharan3107/zen-flow-ui';
 
 function Example() {
-  const [value, setValue] = useState('');
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   
   return (
-    <div className="space-y-4">
-      <Input
-        label="Your Name"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        helperText="Enter your full name"
-      />
-      
-      <Textarea
-        label="Message"
-        placeholder="Tell us about your project..."
-        helperText="Minimum 10 characters"
-      />
-    </div>
+    <Card className="max-w-md">
+      <CardContent className="space-y-4">
+        <Input
+          label="Email Address"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={error}
+          helperText="We'll never share your email"
+        />
+        <Button className="w-full">Subscribe</Button>
+      </CardContent>
+    </Card>
   );
 }
 ```
 
-**Props:**
-- `label`: `string`
-- `helperText`: `string`
-- `error`: `string`
-- `variant`: `'default' | 'error' | 'success'`
-- `size`: `'sm' | 'default' | 'lg'`
-
-### Toggle & Checkbox
-
-Switch and checkbox components with smooth animations.
+### Interactive Data Table
 
 ```tsx
-import { Toggle, Checkbox } from '@gurusharan3107/zen-flow-ui';
+import { DataTable } from '@gurusharan3107/zen-flow-ui';
+
+const columns = [
+  { key: 'name', header: 'Name', sortable: true },
+  { key: 'email', header: 'Email', sortable: true },
+  { key: 'role', header: 'Role' },
+];
+
+const data = [
+  { name: 'John Doe', email: 'john@example.com', role: 'Developer' },
+  { name: 'Jane Smith', email: 'jane@example.com', role: 'Designer' },
+];
 
 function Example() {
-  const [toggleValue, setToggleValue] = useState(false);
-  const [checkboxValue, setCheckboxValue] = useState(false);
-  
   return (
-    <div className="space-y-4">
-      <Toggle
-        checked={toggleValue}
-        onChange={setToggleValue}
-        label="Enable notifications"
-        description="Receive updates about your account"
-      />
-      
-      <Checkbox
-        checked={checkboxValue}
-        onChange={setCheckboxValue}
-        label="I agree to the terms"
-      />
-    </div>
-  );
-}
-```
-
-### Select
-
-Dropdown select with keyboard navigation and search.
-
-```tsx
-import { Select, type SelectOption } from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  const [value, setValue] = useState('');
-  
-  const options: SelectOption[] = [
-    { value: 'option1', label: 'First Option' },
-    { value: 'option2', label: 'Second Option' },
-    { value: 'option3', label: 'Third Option' },
-    { value: 'option4', label: 'Disabled Option', disabled: true },
-  ];
-  
-  return (
-    <Select
-      label="Choose an option"
-      options={options}
-      value={value}
-      onChange={setValue}
-      placeholder="Select your preference..."
+    <DataTable
+      columns={columns}
+      data={data}
+      searchable
+      pagination
+      pageSize={10}
     />
   );
 }
-```
-
-### Modal
-
-Overlay dialog with backdrop blur and smooth transitions.
-
-```tsx
-import { 
-  Modal, 
-  ModalOverlay, 
-  ModalContent, 
-  ModalHeader, 
-  ModalTitle, 
-  ModalDescription,
-  ModalFooter,
-  ModalClose,
-  Button 
-} from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  const [open, setOpen] = useState(false);
-  
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
-      
-      <Modal open={open} onOpenChange={setOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <ModalTitle>Confirm Action</ModalTitle>
-            <ModalDescription>
-              Are you sure you want to continue?
-            </ModalDescription>
-          </ModalHeader>
-          
-          <ModalFooter>
-            <Button variant="secondary" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setOpen(false)}>
-              Confirm
-            </Button>
-          </ModalFooter>
-          
-          <ModalClose onClick={() => setOpen(false)} />
-        </ModalContent>
-      </Modal>
-    </>
-  );
-}
-```
-
-### Progress
-
-Progress indicators with shimmer effects and variants.
-
-```tsx
-import { Progress, CircularProgress } from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  return (
-    <div className="space-y-8">
-      <Progress value={65} showLabel label="Upload Progress" />
-      <Progress value={85} variant="success" showLabel />
-      
-      <div className="flex justify-center">
-        <CircularProgress value={75} size={120} showLabel label="Completion" />
-      </div>
-    </div>
-  );
-}
-```
-
-### Notifications
-
-Toast notifications with auto-dismiss and variants.
-
-```tsx
-import { useToast, Button } from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  const { addToast } = useToast();
-  
-  const showSuccess = () => {
-    addToast({
-      variant: 'success',
-      title: 'Success!',
-      description: 'Your action was completed successfully',
-    });
-  };
-  
-  return (
-    <div className="space-x-4">
-      <Button onClick={showSuccess}>Show Success</Button>
-      <Button onClick={() => addToast({
-        variant: 'error',
-        title: 'Error',
-        description: 'Something went wrong'
-      })}>
-        Show Error
-      </Button>
-    </div>
-  );
-}
-```
-
-### Accordion
-
-Collapsible content sections with smooth animations.
-
-```tsx
-import { Accordion, type AccordionItemData } from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  const [value, setValue] = useState('');
-  
-  const items: AccordionItemData[] = [
-    {
-      value: 'item-1',
-      title: 'What is Zen Flow Design?',
-      content: <p>A minimalist approach to user interface design...</p>
-    },
-    {
-      value: 'item-2', 
-      title: 'Core Principles',
-      content: <p>Clarity, Structure, System, Space, and Story...</p>
-    }
-  ];
-  
-  return (
-    <Accordion
-      items={items}
-      value={value}
-      onValueChange={setValue}
-      collapsible
-    />
-  );
-}
-```
-
-### Skeleton
-
-Placeholder content with shimmer animation.
-
-```tsx
-import { Skeleton } from '@gurusharan3107/zen-flow-ui';
-
-function Example() {
-  return (
-    <div className="space-y-4">
-      <Skeleton variant="title" />
-      <Skeleton variant="text" />
-      <Skeleton variant="text" className="w-4/5" />
-      <Skeleton variant="box" className="h-32" />
-    </div>
-  );
-}
-```
-
-## Design Tokens
-
-Access design tokens programmatically:
-
-```tsx
-import { tokens, generateCSSCustomProperties } from '@gurusharan3107/zen-flow-ui';
-
-// Use tokens in your components
-const customStyle = {
-  color: tokens.colors.water,
-  fontSize: tokens.typography.fontSize.lg,
-  padding: tokens.spacing.md,
-};
-
-// Generate CSS custom properties
-const cssVars = generateCSSCustomProperties();
 ```
 
 ## Customization
@@ -492,7 +251,8 @@ Add Zen Flow colors to your Tailwind config:
 // tailwind.config.js
 module.exports = {
   content: [
-    // ... your content paths
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@gurusharan3107/zen-flow-ui/dist/**/*.js"
   ],
   theme: {
     extend: {
@@ -510,6 +270,25 @@ module.exports = {
         'zen-leaf': '#26de81',
         'zen-sun': '#fed330',
       },
+      animation: {
+        'shimmer': 'shimmer 2s linear infinite',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      keyframes: {
+        'shimmer': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
+        },
+      },
     },
   },
   plugins: [],
@@ -522,22 +301,37 @@ Override design tokens using CSS custom properties:
 
 ```css
 :root {
-  --zen-accent: #your-color;
-  --zen-water: #your-color;
+  --zen-accent: #your-brand-color;
+  --zen-water: #your-primary-color;
   --zen-space-md: 20px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --zen-light: #0a0a0a;
+    --zen-void: #ffffff;
+  }
 }
 ```
 
-## Accessibility
+## Performance & Best Practices
 
-All components follow WCAG guidelines and include:
+### Code Quality
+- ✅ **No Inline Style Anti-patterns** - All styling uses CSS classes and design tokens
+- ✅ **Optimized Bundle Size** - Tree-shakable exports and efficient code splitting
+- ✅ **TypeScript Native** - Full type safety with no runtime overhead
 
-- **Keyboard Navigation**: Full keyboard support
-- **Screen Reader Support**: Proper ARIA labels and semantics
-- **Focus Management**: Visible focus indicators
-- **Motion Sensitivity**: Respects `prefers-reduced-motion`
-- **High Contrast**: Supports high contrast mode
-- **Touch Targets**: Minimum 44x44px touch areas
+### Accessibility
+- ✅ **WCAG 2.1 AA Compliant** - Tested with screen readers and keyboard navigation
+- ✅ **Focus Management** - Proper focus trapping and restoration in modals
+- ✅ **ARIA Labels** - Comprehensive labeling for assistive technologies
+- ✅ **Keyboard Navigation** - Full keyboard support for all interactive elements
+
+### Motion & Animation
+- ✅ **Respects User Preferences** - Honors `prefers-reduced-motion` settings
+- ✅ **Purposeful Motion** - Animations enhance UX without being distracting
+- ✅ **Smooth Transitions** - GPU-accelerated animations for 60fps performance
 
 ## Browser Support
 
@@ -551,26 +345,59 @@ All components follow WCAG guidelines and include:
 ### Common Issues
 
 **CSS not loading properly:**
-- Make sure you've imported the global styles: `import '@gurusharan3107/zen-flow-ui/styles/globals.css'`
-- Ensure Tailwind CSS is configured if you're using custom classes
+- Ensure you've imported the global styles: `import '@gurusharan3107/zen-flow-ui/styles/globals.css'`
+- Check that Tailwind CSS is configured properly in your project
 
 **TypeScript errors:**
-- Install the required type dependencies: `npm install @types/react @types/react-dom`
-- Make sure your `tsconfig.json` includes the `jsx` option
+- Install required type dependencies: `npm install @types/react @types/react-dom`
+- Ensure your `tsconfig.json` includes the `jsx` option
 
 **Component styling issues:**
 - Verify that `clsx` and `tailwind-merge` are installed
-- Check that the `cn` utility function is properly imported
+- Check that the `cn` utility function is properly imported and configured
 
-**CLI not working:**
-- The CLI is currently experimental. Use direct imports instead:
-  ```tsx
-  import { ComponentName } from '@gurusharan3107/zen-flow-ui';
-  ```
+**Animation performance:**
+- Enable hardware acceleration: `transform3d(0,0,0)` or `will-change: transform`
+- Consider using `prefers-reduced-motion` for users with motion sensitivity
 
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development
+
+```bash
+# Clone the repository
+git clone https://github.com/ingpoc/zen-flow-ui.git
+
+# Install dependencies
+npm install
+
+# Start development
+npm run dev
+
+# Run tests
+npm run test
+
+# Build library
+npm run build
+```
+
+## Changelog
+
+### v2.1.2 (Latest)
+- ✅ **Build Quality Improvements**: Resolved all TypeScript build errors and warnings
+- ✅ **Fixed Component Structure**: Moved demo files to examples folder for cleaner builds
+- ✅ **Enhanced Type Safety**: Fixed Framer Motion conflicts in Dialog and Tooltip components
+- ✅ **Package.json Improvements**: Updated repository URL format and package metadata
+- ✅ **Clean Architecture**: Zero inline style anti-patterns, optimized performance
+
+### v2.1.1
+- ✅ Fixed inline style anti-patterns across all components
+- ✅ Improved TypeScript definitions for better DX
+- ✅ Enhanced accessibility features
+- ✅ Optimized bundle size and performance
+- ✅ Updated documentation and examples
 
 ## License
 
@@ -582,4 +409,6 @@ MIT License - see [LICENSE](LICENSE) for details.
   <p><em>"Design is not about making things pretty—it's about making things work beautifully."</em></p>
   
   **Built with ❤️ by the Zen Flow Team**
+  
+  [Documentation](https://github.com/ingpoc/zen-flow-ui) • [NPM Package](https://www.npmjs.com/package/@gurusharan3107/zen-flow-ui) • [Issues](https://github.com/ingpoc/zen-flow-ui/issues)
 </div>

@@ -1,25 +1,28 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-    './stories/**/*.{js,ts,jsx,tsx}',
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@gurusharan3107/zen-flow-ui/dist/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {
       colors: {
         // Zen Flow color palette
-        'zen-void': '#0a0a0a',
+        'zen-void': '#000000',
         'zen-ink': '#1a1a1a',
         'zen-shadow': '#2a2a2a',
         'zen-stone': '#4a4a4a',
         'zen-mist': '#8a8a8a',
         'zen-cloud': '#dadada',
-        'zen-paper': '#fafafa',
+        'zen-paper': '#f5f5f5',
         'zen-light': '#ffffff',
-        'zen-accent': '#ff4757',
+        
+        // Accent colors
         'zen-water': '#3742fa',
-        'zen-leaf': '#26de81',
-        'zen-sun': '#fed330',
+        'zen-leaf': '#2ed573',
+        'zen-sun': '#ffa502',
+        'zen-accent': '#ff4757',
         
         // Semantic colors
         border: 'hsl(var(--border))',

@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import { getComponentThemeProps } from '../../lib/theme-constants';
 
 const toggleVariants = cva(
   [
@@ -97,13 +98,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
         className={cn(toggleVariants({ size, variant }), className)}
         onClick={handleToggle}
         ref={ref}
-        style={{
-          '--zen-water': '#3742fa',
-          '--zen-accent': '#ff4757',
-          '--zen-leaf': '#26de81',
-          '--zen-cloud': '#dadada',
-          '--zen-light': '#ffffff',
-        } as React.CSSProperties}
+        style={getComponentThemeProps('toggle')}
         {...props}
       >
         <span
@@ -197,11 +192,7 @@ const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         className={cn(checkboxVariants(), className)}
         onClick={handleToggle}
         ref={ref}
-        style={{
-          '--zen-water': '#3742fa',
-          '--zen-cloud': '#dadada',
-          '--zen-light': '#ffffff',
-        } as React.CSSProperties}
+        style={getComponentThemeProps('toggle')}
         {...props}
       >
         {(checked || indeterminate) && (

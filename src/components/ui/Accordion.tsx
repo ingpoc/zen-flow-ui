@@ -94,12 +94,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       <div
         ref={ref}
         className={cn(accordionVariants(), className)}
-        style={{
-          '--zen-cloud': '#dadada',
-          '--zen-water': '#3742fa',
-          '--zen-ink': '#1a1a1a',
-          '--zen-stone': '#4a4a4a',
-        } as React.CSSProperties}
         {...props}
       >
         {items.map((item) => (
@@ -176,14 +170,16 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
       
       <div
         ref={contentRef}
-        className={cn(accordionContentVariants())}
+        className={cn(
+          accordionContentVariants(),
+          'transition-all duration-300 ease-out overflow-hidden',
+          isOpen ? 'h-auto' : 'h-0'
+        )}
         data-state={isOpen ? 'open' : 'closed'}
         id={`accordion-content-${value}`}
         role="region"
         aria-labelledby={`accordion-trigger-${value}`}
-        style={{
-          height: isOpen ? contentRef.current?.scrollHeight || 'auto' : 0,
-        }}
+        style={isOpen ? { height: contentRef.current?.scrollHeight || 'auto' } : { height: 0 }}
       >
         <div className="px-6 pb-4 text-zen-stone">
           {content}
